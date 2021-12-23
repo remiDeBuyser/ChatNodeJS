@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <span>Nombre d'utilisateur : </span><span id="pers">0</span>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        socket.on('nbpers', function(nb) {
+            console.log("ici")
+            document.getElementById("pers").innerHTML = nb.nbpers;
+        });
+
+    </script>
+</body>
+</html>
