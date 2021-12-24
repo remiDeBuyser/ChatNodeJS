@@ -3,9 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body {
+            margin:0;
+            min-height: 100vh;
+        }
+        .nbPers {
+            position: absolute;
+            top: 50px;
+            right: 0;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 200px auto 200px;
+            height: calc( 100vh - 40px );
+        }
+        .grid-container div {
+            border: 1px solid rgba(0,0,0,0.5);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            height: 40px;
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
-    <span>Nombre d'utilisateur : </span><span id="pers">0</span>
+    <div class="nbPers">
+        <span>Nombre d'utilisateurs : </span><span id="pers"></span>
+    </div>
+    <nav>
+        <div>PatChat</div>
+        <div>Profil</div>
+    </nav>
+    <div class="grid-container">
+        <div class="groupes"></div>
+        <div class="messages"></div>
+        <div class="connected"></div>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
