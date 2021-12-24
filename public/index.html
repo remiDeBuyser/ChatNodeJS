@@ -7,25 +7,84 @@
         body {
             margin:0;
             min-height: 100vh;
+            overflow: hidden;
+            font-family: sans-serif;
         }
         .nbPers {
             position: absolute;
             top: 50px;
-            right: 0;
+            right: 5px;
         }
         .grid-container {
             display: grid;
             grid-template-columns: 200px auto 200px;
             height: calc( 100vh - 40px );
         }
-        .grid-container div {
-            border: 1px solid rgba(0,0,0,0.5);
-        }
         nav {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            background: #00a8ff;
+            color: white;
             height: 40px;
-            border: 1px solid black;
+            padding: 0 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3)  ;
+            -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.3)  ;
+            -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.3)  ;
+        }
+        nav div {
+            display: flex;
+            align-items: center;
+        }
+        .messages {
+            position: relative;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.3) inset;
+            -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3) inset;
+            -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.3) inset;
+        }
+        .bottom {
+            position: absolute;
+            bottom: 5px;
+            display: flex;
+            width: -webkit-fill-available;
+            width: -moz-available;
+            width: available;
+        }
+        .inputMsg {
+            width: -webkit-fill-available;
+            width: -moz-available;
+            width: available;
+            margin: 0 5px;
+            font-size: 0.9em;
+            padding: 4px 12px;
+            border: 2px solid deepskyblue;
+            border-radius: 12px;
+        }
+        .sendBtn {
+            padding: 8px 19px;
+            border-radius: 20px;
+            background: deepskyblue;
+            border: none;
+            color: white;
+            margin: 0 5px;
+            font-size: 0.9em;
+        }
+        .container-msg {
+            overflow-y: scroll;
+            height: calc(100vh - 80px);
+        }
+        .container-msg::-webkit-scrollbar {
+            width: 8px; /* width of the entire scrollbar */
+        }
+
+        .container-msg::-webkit-scrollbar-track {
+            background: none; /* color of the tracking area */
+        }
+
+        .container-msg::-webkit-scrollbar-thumb {
+            background-color: deepskyblue; /* color of the scroll thumb */
+            border-radius: 20px; /* roundness of the scroll thumb */
+            border: 3px solid rgba(0, 0, 0, 0); /* creates padding around scroll thumb */
         }
     </style>
 </head>
@@ -34,24 +93,82 @@
         <span>Nombre d'utilisateurs : </span><span id="pers"></span>
     </div>
     <nav>
-        <div>PatChat</div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490" width="25" style="border-radius: 100%;">
+                <defs>
+                    <style>.cls-1{fill:#b1d0e0;}.cls-2,.cls-7{fill:#fff;}.cls-2{opacity:0.75;}.cls-3{fill:#406882;}.cls-4{fill:#1a374d;}.cls-5{opacity:0.15;}.cls-6{fill:#6998ab;}.cls-7{opacity:0.5;}svg:hover #envelope{animation:envelope 2s ease infinite}@keyframes envelope{0%{transform:translate(0,0)}25%{transform:translate(-10%,0) rotate(-5deg)}50%{transform:translate(100%,0) rotate(5deg)}50.01%{transform:translate(-100%,0) rotate(0)}70%{transform:translate(0,0) rotate(5deg)}}</style>
+                </defs>
+                <g id="background">
+                    <circle id="background_circle" class="cls-1" cx="245" cy="245" r="245"/>
+                </g>
+                <g id="envelope">
+                    <rect id="back" class="cls-3" x="67.92" y="120.01" width="354.17" height="250" rx="35.1"/>
+                    <path id="bottom" class="cls-4" d="M298.73,245.34h-.32L272.08,270A32.26,32.26,0,0,1,228,270l-26.09-24.44L82.68,364.82a35.24,35.24,0,0,0,22.82,10l287,.19c9.31-.65,17.4-3.4,24.86-11.45Z" transform="translate(-5 -5)"/>
+                    <path id="top_shadow" class="cls-5" d="M272.06,298.26l144.48-163A33.6,33.6,0,0,0,392.38,125h-284a34.86,34.86,0,0,0-24.94,9.79L227.94,298.26A32.28,32.28,0,0,0,272.06,298.26Z" transform="translate(-5 -5)"/>
+                    <path id="top" class="cls-6" d="M416.54,135.28,400.3,151.91,272.45,282.85a32.28,32.28,0,0,1-44.12,0L83.46,134.8A34.86,34.86,0,0,1,108.4,125h284a33.52,33.52,0,0,1,16.08,4.11l.49.27A33.05,33.05,0,0,1,416.54,135.28Z" transform="translate(-5 -5)"/>
+                    <path id="bottom_shadow" class="cls-5" d="M427.08,160.11v179.8A35.1,35.1,0,0,1,392,375H108a35.1,35.1,0,0,1-35.09-35,35,35,0,0,0,8.31,1h284a35.1,35.1,0,0,0,35.1-35.1v-154l16.24-16.63a33.05,33.05,0,0,0-7.59-5.89A35,35,0,0,1,427.08,160.11Z" transform="translate(-5 -5)"/>
+                    <rect id="bottom_shadow_white" class="cls-7" x="140.59" y="222.84" width="107.82" height="14.06" rx="7.03" transform="translate(218.17 -74.88) rotate(45.7)"/>
+                    <rect id="top_shadow_white" class="cls-7" x="109.81" y="161.61" width="49.89" height="14.06" rx="7.03" transform="translate(156.34 -50.59) rotate(45.7)"/>
+                </g>
+            </svg>
+            <span>PatChat</span>
+        </div>
         <div>Profil</div>
     </nav>
     <div class="grid-container">
         <div class="groupes"></div>
-        <div class="messages"></div>
-        <div class="connected"></div>
+        <div class="messages">
+            <div class="container-msg" id="messages"></div>
+            <form onsubmit="sendMessage()"class="bottom" action="javascript:void(0);">
+                <input type="text" id="inputMsg" class="inputMsg" placeholder="Entrez votre message :">
+                <button class="sendBtn">Envoyer</button>
+            </form>
+        </div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
+        var inputMsg = document.getElementById("inputMsg");
 
         socket.on('nbpers', function(nb) {
-            console.log("ici")
             document.getElementById("pers").innerHTML = nb.nbpers;
         });
 
+        socket.on('chat message', function(msg) {
+            pushMessage(msg);
+        });
+
+        function sendMessage() {
+            if (inputMsg.value) {
+                socket.emit('chat message', inputMsg.value);
+                inputMsg.value = "";
+            }
+        }
+
+        function pushMessage(msgTxt) {
+            var containermsg = document.getElementById("messages");
+            var msg = document.createElement("div");
+            var spanMsg = document.createElement("span");
+            msg.style.display = "grid"
+            msg.style.gridTemplateColumns = "1fr 2.5em"
+            spanMsg.style.paddingLeft = "4px";
+            var spanDate = document.createElement("span");
+            spanDate.style.textAlign = "right"
+            spanMsg.innerHTML = msgTxt;
+
+            var date = new Date();
+            var currentHours = date.getHours();
+            currentHours = ("0" + currentHours).slice(-2);
+            var currentMin = date.getMinutes();
+            currentMin = ("0" + currentMin).slice(-2);
+
+            spanDate.innerHTML = currentHours + ":" + currentMin;
+            msg.appendChild(spanMsg);
+            msg.appendChild(spanDate);
+            containermsg.appendChild(msg);
+            document.getElementById("messages").scrollTo(0, document.getElementById("messages").scrollHeight);
+        }
     </script>
 </body>
 </html>

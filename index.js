@@ -8,17 +8,30 @@ app.get('/public/', (req, res) =>{
     res.sendFile(__dirname+'/public/index.html');
 });
 
-var nbPers = 0
+var nbPers = 0;
 
 io.sockets.on('connection', (socket) => {
     nbPers++;
-    io.sockets.emit('nbpers', {nbpers: nbPers})
+    io.sockets.emit('nbpers', {nbpers: nbPers});
     socket.on('disconnect', () => {
         nbPers--;
-        io.sockets.emit('nbpers', {nbpers: nbPers})
+        io.sockets.emit('nbpers', {nbpers: nbPers});
+    });
+});
+
+io.sockets.on('connection', (socket) => {
+    nbPers++;
+    io.sockets.emit('nbpers', {nbpers: nbPers/2});
+    socket.on('disconnect', () => {
+        nbPers--;
+        io.sockets.emit('nbpers', {nbpers: nbPers/2});
+    });
+
+    socket.on('chat message', msg =>{
+        io.sockets.emit('chat message', msg);
     });
 });
 
 http.listen(port, () =>{
-    console.log('socketio server run at http://localhost:'+port)
+    console.log('socketio server run at http://localhost:'+port);
 });
